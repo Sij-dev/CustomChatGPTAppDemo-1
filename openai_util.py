@@ -39,7 +39,7 @@ def init_pinecone(idx_name = "consciousness-openai"):
     
 def openAI_get_response(index ,message, openai_api_key,model = "gpt-3.5-turbo" ):
     
-    embeddings = OpenAIEmbeddings() #model = model
+    embeddings = OpenAIEmbeddings(openai_api_key=openai_api_key) #model = model
 
     docsearch = Pinecone(index, embeddings.embed_query, 'text')
     docs = docsearch.similarity_search(message, include_metadata=True)

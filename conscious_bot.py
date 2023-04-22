@@ -10,13 +10,12 @@ st.markdown("##### based on 'Heartfullness-Dec17 Magazine - What is Consciousnes
 st.divider()
 
 ##### Get Open AI API Key from User
+st.markdown("Provide your OpenAI API Key - check out this to get OpenAI API Key. \
+        [link](https://help.openai.com/en/articles/4936850-where-do-i-find-my-secret-api-key)")
 def get_api_key():
-    st.markdown("Provide your OpenAI API Key")
-    input_text = st.text_input(label="check out this to get OpenAI API Key. \
-        [link](https://help.openai.com/en/articles/4936850-where-do-i-find-my-secret-api-key)", 
+    input_text = st.text_input(label= "Open API Key", 
         placeholder="Ex: sk-2twmA8tfCb8un4...",
         key="openai_api_key_input")
-    st.write()
 
     return input_text
 
