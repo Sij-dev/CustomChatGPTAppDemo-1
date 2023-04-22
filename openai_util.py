@@ -5,16 +5,23 @@ from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.llms import OpenAI
 
+import streamlit as st
 
 from langchain.chains.question_answering import load_qa_chain
 
 import pinecone
 import os
-from dotenv import load_dotenv
-if load_dotenv():
-    PINECONE_API_KEY = os.getenv('PINECONE_API_KEY')
-    PINECONE_API_ENV = os.getenv('PINECONE_API_ENV')  
+
+#### uncomment for running locally #######
+# from dotenv import load_dotenv
+# if load_dotenv():
+#     pinecone_api_key = os.getenv('PINECONE_API_KEY')
+#     pinecone_api_env = os.getenv('PINECONE_API_ENV')  
     #OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')  
+    
+#for streamlit cloud - comment to run locally 
+pinecone_api_key = st.secrets["PINECONE_API_KEY"]
+pinecone_api_env = st.secrets["PINECONE_API_ENV"]
 
 def init_pinecone(idx_name = "consciousness-openai"):
     #pinecone index name
@@ -22,8 +29,8 @@ def init_pinecone(idx_name = "consciousness-openai"):
 
     # initialize pinecone
     pinecone.init(
-        api_key=PINECONE_API_KEY,  # find at app.pinecone.io
-        environment=PINECONE_API_ENV  # next to api key in console
+        api_key=pinecone_api_key,  # find at app.pinecone.io
+        environment=pinecone_api_env  # next to api key in console
     )
     
     index = pinecone.Index(index_name)
