@@ -49,10 +49,10 @@ def openAI_get_response(index ,message, openai_api_key,model = "gpt-3.5-turbo" )
     docsearch = Pinecone(index, embeddings.embed_query, 'text')
     docs = docsearch.similarity_search(message, include_metadata=True)
     
-    #llm = OpenAI(temperature=0, openai_api_key=openai_api_key) #, model_name= model
-    #chain = load_qa_chain(llm, chain_type="stuff")
-    chat = ChatOpenAI(temperature=0, openai_api_key=openai_api_key,model_name= model)
-    chain = load_qa_chain(chat, chain_type="stuff")
+    llm = OpenAI(temperature=0, openai_api_key=openai_api_key) #, model_name= model
+    chain = load_qa_chain(llm, chain_type="stuff")
+    # chat = ChatOpenAI(temperature=0, openai_api_key=openai_api_key,model_name= model)
+    # chain = load_qa_chain(chat, chain_type="stuff")
 
 
     docs = docsearch.similarity_search(query=message)
