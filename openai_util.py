@@ -17,7 +17,7 @@ import os
 # if load_dotenv():
 #     pinecone_api_key = os.getenv('PINECONE_API_KEY')
 #     pinecone_api_env = os.getenv('PINECONE_API_ENV')  
-    #OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')  
+#     OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')  
     
 #for streamlit cloud - comment to run locally 
 pinecone_api_key = st.secrets["PINECONE_API_KEY"]
