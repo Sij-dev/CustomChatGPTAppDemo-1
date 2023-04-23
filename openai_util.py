@@ -41,7 +41,7 @@ def openAI_get_response(index ,message, openai_api_key,model = "gpt-3.5-turbo" )
     
     try:
         embeddings = OpenAIEmbeddings(openai_api_key=openai_api_key) #model = model
-    except openai.error.AuthenticationError:
+    except Exception:
         st.error("Please enter a valid Open API")
         
 
@@ -50,7 +50,7 @@ def openAI_get_response(index ,message, openai_api_key,model = "gpt-3.5-turbo" )
     
     try:
         llm = OpenAI(temperature=0, openai_api_key=openai_api_key) #model_name= model
-    except openai.error.AuthenticationError:
+    except Exception:
         st.error("Please enter a valid Open API")
         
     chain = load_qa_chain(llm, chain_type="stuff")
