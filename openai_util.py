@@ -4,7 +4,7 @@ from tqdm.autonotebook import tqdm
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.llms import OpenAI
-from langchain.chat_models import ChatOpenAI
+#from langchain.chat_models import ChatOpenAI
 
 import streamlit as st
 
