@@ -5,7 +5,7 @@ import openai_util
 
 
 st.set_page_config(page_title="Consciousness-QA-bot", page_icon=":robot:")
-st.header("Ask your Question about conciousness ")
+st.header("Ask your Question about consciousness ")
 st.markdown("##### based on 'Heartfullness-Dec17 Magazine - What is Consciousness' ?")
 st.divider()
 
