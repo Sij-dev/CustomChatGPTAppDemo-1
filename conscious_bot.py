@@ -43,17 +43,19 @@ query = st.text_input("Query: ", key="input")
 if 'messages' not in st.session_state:
     st.session_state['messages'] = openai_util.get_initial_message()
     
-
-if query:
-    with st.spinner("generating..."):
-        messages = st.session_state['messages']
-        messages = openai_util.update_chat(messages, "user", query)
-        response = openai_util.openAI_get_response(pincone_index,query,openai_api_key)
-        
-        #response = openai_util.get_chatgpt_response(messages,model)
-        messages = openai_util.update_chat(messages, "assistant", response)
-        st.session_state.past.append(query)
-        st.session_state.generated.append(response)
+if len(openai_api_key) <= 10:
+    st.error("give a valid Open API key to proceed")
+else:    
+    if query:
+        with st.spinner("generating..."):
+            messages = st.session_state['messages']
+            messages = openai_util.update_chat(messages, "user", query)
+            response = openai_util.openAI_get_response(pincone_index,query,openai_api_key)
+            
+            #response = openai_util.get_chatgpt_response(messages,model)
+            messages = openai_util.update_chat(messages, "assistant", response)
+            st.session_state.past.append(query)
+            st.session_state.generated.append(response)
 
 if st.session_state['generated']:
     for i in range(len(st.session_state['generated'])-1, -1, -1):
