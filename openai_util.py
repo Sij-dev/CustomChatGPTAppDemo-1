@@ -4,7 +4,7 @@ from tqdm.autonotebook import tqdm
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.llms import OpenAI
-from langchain.llms import ChatOpenAI
+from langchain.chat_models import ChatOpenAI
 
 import streamlit as st
 
@@ -49,8 +49,11 @@ def openAI_get_response(index ,message, openai_api_key,model = "gpt-3.5-turbo" )
     docsearch = Pinecone(index, embeddings.embed_query, 'text')
     docs = docsearch.similarity_search(message, include_metadata=True)
     
-    llm = ChatOpenAI(temperature=0, openai_api_key=openai_api_key, model_name= model)
-    chain = load_qa_chain(llm, chain_type="stuff")
+    #llm = OpenAI(temperature=0, openai_api_key=openai_api_key) #, model_name= model
+    #chain = load_qa_chain(llm, chain_type="stuff")
+    chat = ChatOpenAI(temperature=0, openai_api_key=openai_api_key,model_name= model)
+    chain = load_qa_chain(chat, chain_type="stuff")
+
 
     docs = docsearch.similarity_search(query=message)
     response = chain.run(input_documents=docs, question=message)
