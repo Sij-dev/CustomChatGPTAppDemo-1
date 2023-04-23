@@ -4,7 +4,6 @@ from tqdm.autonotebook import tqdm
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.llms import OpenAI
-#from langchain.chat_models import ChatOpenAI
 
 import streamlit as st
 
@@ -43,17 +42,14 @@ def openAI_get_response(index ,message, openai_api_key,model = "gpt-3.5-turbo" )
     try:
         embeddings = OpenAIEmbeddings(openai_api_key=openai_api_key) #model = model
     except ValueError:
-        st.error("Please enter a valid Open API key")
+        st.error("Please enter a valid Open API")
         
 
     docsearch = Pinecone(index, embeddings.embed_query, 'text')
     docs = docsearch.similarity_search(message, include_metadata=True)
     
-    llm = OpenAI(temperature=0, openai_api_key=openai_api_key) #, model_name= model
+    llm = OpenAI(temperature=0, openai_api_key=openai_api_key) #model_name= model
     chain = load_qa_chain(llm, chain_type="stuff")
-    # chat = ChatOpenAI(temperature=0, openai_api_key=openai_api_key,model_name= model)
-    # chain = load_qa_chain(chat, chain_type="stuff")
-
 
     docs = docsearch.similarity_search(query=message)
     response = chain.run(input_documents=docs, question=message)
@@ -63,7 +59,7 @@ def openAI_get_response(index ,message, openai_api_key,model = "gpt-3.5-turbo" )
 def get_initial_message():
     
     messages=[
-            {"role": "system", "content": " You are a spiritual friendly person and heartfullness practioner.\
+            {"role": "system", "content": " You are a spiritual person and heartfullness practioner.\
               Hearfullness is the meditation technique based on yogic transmission., You will explain \
              spirtiual related question in simple human understandable format with examples.\
              Also you will explain differnt perspectives of the question and answer accordingly. \
